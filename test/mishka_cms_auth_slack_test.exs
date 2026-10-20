@@ -5,10 +5,10 @@
 defmodule MishkaCmsAuthSlackTest do
   use ExUnit.Case, async: true
 
-  test "is a sign-in provider for the core's slack strategy" do
+  test "is a sign-in provider Assent speaks to" do
     assert MishkaCmsCore.Accounts.SignInProvider in behaviours(MishkaCmsAuthSlack)
     assert MishkaCmsAuthSlack.id() == "slack"
-    assert MishkaCmsAuthSlack.strategy() == :slack
+    assert %{assent: Assent.Strategy.Slack} = MishkaCmsAuthSlack.oauth()
     assert MishkaCmsAuthSlack.label() == "Slack"
     assert %{path: "M" <> _, color: "text-" <> _} = MishkaCmsAuthSlack.icon()
   end

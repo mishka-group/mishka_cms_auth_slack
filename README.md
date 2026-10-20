@@ -16,7 +16,7 @@ Run `mix deps.get` and restart. The package registers itself with Mishka CMS thr
 ## Set up
 
 1. Make the app at [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** (under **OAuth & Permissions** add the user scopes `openid`, `email`, `profile`).
-2. Redirect URL (OAuth & Permissions; Slack takes `https://` only): `https://<your-site>/api/auth/user/slack/callback`
+2. Redirect URL (OAuth & Permissions; Slack takes `https://` only): `https://<your-site>/api/auth/user/provider/callback`
 3. In Mishka CMS: **Settings → Security → Sign-in methods** → switch **Slack** on. Paste the
    **Client ID** and **Client Secret (Basic Information → App Credentials)** into the fields that open under it, then **Save**.
 

@@ -8,21 +8,24 @@ defmodule MishkaCmsAuthSlack do
   started by `MishkaCmsAuthSlack.Application`: installed, it adds Slack to every site's Security tab →
   Sign-in methods, where each site switches it on and sets its keys.
 
-  Signing in with a Slack account ("Sign in with Slack", OpenID Connect): the `slack` strategy on
-  `MishkaCmsCore.Accounts.User`, with an app made at api.slack.com/apps. Under OAuth & Permissions
-  its redirect URL is the site's `MishkaCmsCore.Accounts.SignInProvider.callback_url/2`, and the
-  user scopes are `openid`, `email` and `profile`. Slack says whether the email is verified, and
-  only a verified one signs in.
+  Signing in with a Slack account ("Sign in with Slack", OpenID Connect): `Assent.Strategy.Slack`
+  through the core's one provider strategy, with an app made at api.slack.com/apps. Under OAuth &
+  Permissions its redirect URL is the site's
+  `MishkaCmsCore.Accounts.SignInProvider.callback_url/1`, and the user scopes are `openid`,
+  `email` and `profile`. Slack says whether the email is verified, and only a verified one signs
+  in.
   """
 
   use MishkaCmsCore.Accounts.SignInProvider,
     id: "slack",
-    strategy: :slack,
     label: gettext_noop("Slack"),
     priority: 30
 
   @client_id "auth.providers.slack.client_id"
   @client_secret "auth.providers.slack.client_secret"
+
+  @impl true
+  def oauth, do: %{assent: Assent.Strategy.Slack}
 
   @impl true
   def icon,
@@ -38,7 +41,7 @@ defmodule MishkaCmsAuthSlack do
       key(@client_id, gettext_noop("Slack client ID"),
         description:
           gettext_noop(
-            "From Basic Information of the Slack app made for this site, at api.slack.com/apps. Its redirect address is this site's address followed by /api/auth/user/slack/callback."
+            "From Basic Information of the Slack app made for this site, at api.slack.com/apps. Its redirect address is this site's address followed by /api/auth/user/provider/callback."
           )
       ),
       key(@client_secret, :secret, gettext_noop("Slack client secret"),
