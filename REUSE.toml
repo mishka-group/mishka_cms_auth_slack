@@ -1,0 +1,15 @@
+version = 1
+
+[[annotations]]
+path = [
+  "REUSE.toml",
+  "LICENSE",
+  "LICENSES/**",
+  ".gitignore",
+  ".tool-versions",
+  "README.md",
+  "mix.lock",
+  ".github/workflows/*.yml",
+]
+SPDX-FileCopyrightText = "2026 Mishka Group contributors <https://github.com/mishka-group/mishka_cms_auth_slack/graphs/contributors>"
+SPDX-License-Identifier = "Apache-2.0"
