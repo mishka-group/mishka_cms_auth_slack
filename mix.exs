@@ -48,7 +48,7 @@ defmodule MishkaCmsAuthSlack.MixProject do
     [
       mishka_dep(:mishka_cms_core, "~> 0.0.1"),
       {:ash_authentication, "~> 5.0.0-rc.15"},
-      mishka_dep(:mishka_gervaz, "~> 0.0.1"),
+      mishka_dep(:mishka_gervaz, "~> 0.0.2"),
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
