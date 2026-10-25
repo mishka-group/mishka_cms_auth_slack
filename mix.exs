@@ -26,7 +26,7 @@ defmodule MishkaCmsAuthSlack.MixProject do
       docs: [
         main: "readme",
         source_ref: "v#{@version}",
-        extras: ["README.md"],
+        extras: ["README.md", LICENSE: [title: "License"]],
         source_url: @source_url
       ]
     ]
