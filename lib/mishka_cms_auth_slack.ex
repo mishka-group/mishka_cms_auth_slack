@@ -5,7 +5,7 @@
 defmodule MishkaCmsAuthSlack do
   @moduledoc """
   A `mishka_installer` plugin on `"auth:providers"` (`MishkaCmsCore.Accounts.SignInProvider`),
-  started by `MishkaCmsAuthSlack.Application`: installed, it adds Slack to every site's Security tab →
+  started by MishkaCmsAuthSlack.Application: installed, it adds Slack to every site's Security tab →
   Sign-in methods, where each site switches it on and sets its keys.
 
   Signing in with a Slack account ("Sign in with Slack", OpenID Connect): `Assent.Strategy.Slack`

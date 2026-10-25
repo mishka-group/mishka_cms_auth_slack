@@ -26,7 +26,7 @@ defmodule MishkaCmsAuthSlack.MixProject do
       docs: [
         main: "readme",
         source_ref: "v#{@version}",
-        extras: ["README.md"],
+        extras: ["README.md", LICENSE: [title: "License"]],
         source_url: @source_url
       ]
     ]
@@ -46,13 +46,26 @@ defmodule MishkaCmsAuthSlack.MixProject do
 
   defp deps do
     [
-      {:mishka_cms_core, path: "../mishka_cms_core"},
-      {:ash_authentication,
-       github: "team-alembic/ash_authentication", branch: "main", override: true},
-      {:mishka_gervaz, path: "../mishka_gervaz", override: true},
+      mishka_dep(:mishka_cms_core, "~> 0.0.1"),
+      {:ash_authentication, "~> 5.0.0-rc.15"},
+      mishka_dep(:mishka_gervaz, "~> 0.0.2"),
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
+  end
+
+  # A Mishka package is its sibling checkout `../<name>` when there is one, and its Hex release
+  # otherwise. Only a git checkout counts, so the copy Mix fetched into a host's `deps/` never does,
+  # and a `hex.*` task (`mix hex.build`, `mix hex.publish`) always takes Hex, as a package must.
+  defp mishka_dep(name, requirement) do
+    sibling? =
+      File.dir?(Path.expand("../#{name}/.git", __DIR__)) and
+        not Enum.any?(System.argv(), &String.starts_with?(&1, "hex."))
+
+    case sibling? do
+      true -> {name, path: "../#{name}"}
+      false -> {name, requirement}
+    end
   end
 
   # The provider is a module: its tests run without starting the CMS.
