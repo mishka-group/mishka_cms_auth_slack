@@ -47,9 +47,8 @@ defmodule MishkaCmsAuthSlack.MixProject do
   defp deps do
     [
       {:mishka_cms_core, path: "../mishka_cms_core"},
-      {:ash_authentication,
-       github: "team-alembic/ash_authentication", branch: "main", override: true},
-      {:mishka_gervaz, "~> 0.0.1"},
+      {:ash_authentication, "~> 5.0.0-rc.15"},
+      {:mishka_gervaz, "~> 0.0.1", override: true},
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
