@@ -91,6 +91,34 @@ jobs:
         env:
           MIX_ENV: test
 
+  # mix_audit checks mix.lock against the elixir-security-advisories database. It runs a task from a
+  # dependency, so it starts from the build like the format check. Hex's own audit is hex-audit.yml.
+  audit:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+          version-type: strict
+          hexpm-mirrors: ${{ env.HEXPM_MIRRORS }}
+
+      - uses: actions/cache/restore@v6
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-otp-${{ env.OTP_VERSION }}-elixir-${{ env.ELIXIR_VERSION }}-mix-${{ hashFiles('mix.lock') }}-${{ github.sha }}
+          fail-on-cache-miss: true
+
+      - run: mix deps.audit
+        env:
+          MIX_ENV: test
+
   # The provider is a module and its tests run without starting the CMS (`mix test` is aliased to
   # `test --no-start` in mix.exs), so there is no database to bring up.
   test:
