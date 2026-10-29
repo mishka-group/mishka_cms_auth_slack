@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Mishka Group contributors <https://github.com/mishka-group/mishka_cms_auth_slack/graphs/contributors>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[exit: :low, format: "txt", ignore: [], ignore_files: [], include_mix_tasks: false, include_scripts: false, out: nil, private: false, router: nil, skip: false, summary: false, threshold: :low, verbose: false]
