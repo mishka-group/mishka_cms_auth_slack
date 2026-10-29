@@ -74,6 +74,7 @@
             #
             ## Consistency Checks
             #
+            {Credo.Check.Consistency.ExceptionNames, []},
             {Credo.Check.Consistency.LineEndings, []},
             {Credo.Check.Consistency.ParameterPatternMatching, []},
             {Credo.Check.Consistency.SpaceAroundOperators, []},
@@ -92,6 +93,7 @@
             ## Readability Checks
             #
             {Credo.Check.Readability.FunctionNames, []},
+            {Credo.Check.Readability.LargeNumbers, []},
             {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
             {Credo.Check.Readability.ModuleAttributeNames, []},
             {Credo.Check.Readability.ModuleDoc, []},
@@ -114,6 +116,7 @@
             #
             ## Refactoring Opportunities
             #
+            {Credo.Check.Refactor.Apply, []},
             {Credo.Check.Refactor.CondStatements, []},
             {Credo.Check.Refactor.CyclomaticComplexity, []},
             {Credo.Check.Refactor.FilterCount, []},
@@ -194,10 +197,7 @@
             Enum.map(
               Enum.reject(
                 ExSlop.recommended_checks(),
-                &(&1 in [
-                  ExSlop.Check.Refactor.LengthComparison,
-                  ExSlop.Check.Warning.PathExpandPriv
-                ])
+                &(&1 == ExSlop.Check.Refactor.LengthComparison)
               ),
               &{&1, []}
             ) ++
@@ -205,20 +205,13 @@
         disabled: [
           # Switched off because the project's own convention differs, one reason each.
           #
-          # Modules are written out in full or aliased as the reader needs.
+          # Modules are written out in full or aliased as the reader needs; about 1,100 aliases for no
+          # change in behaviour.
           {Credo.Check.Design.AliasUsage, []},
           # Aliases are grouped by what they belong to, not sorted.
           {Credo.Check.Readability.AliasOrder, []},
-          # `apply/3` is how a plugin's module and the host endpoint are called.
-          {Credo.Check.Refactor.Apply, []},
-          # Only one test file writes numbers of this size.
-          {Credo.Check.Readability.LargeNumbers, []},
           # TODOs are tracked in the issue tracker, not by the build.
           {Credo.Check.Design.TagTODO, []},
-          # An exception module is named for what it is (`Strict.Violation`), not forced to end in Error.
-          {Credo.Check.Consistency.ExceptionNames, []},
-          # The three `Path.expand` calls already start from `Application.app_dir/1`.
-          {ExSlop.Check.Warning.PathExpandPriv, []},
 
           #
           # Checks scheduled for next check update (opt-in for now)

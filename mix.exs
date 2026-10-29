@@ -82,7 +82,7 @@ defmodule MishkaCmsAuthSlack.MixProject do
   defp aliases do
     [
       test: ["test --no-start"],
-      # The two audits come first: after `compile`, `mix hex.audit` is not found.
+      # hex.audit first: after `compile`, Mix prunes the code path and the Hex archive's task can no longer be found.
       ci: [
         "hex.audit",
         "deps.audit",
