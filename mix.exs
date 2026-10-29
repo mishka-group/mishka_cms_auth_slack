@@ -28,9 +28,13 @@ defmodule MishkaCmsAuthSlack.MixProject do
         source_ref: "v#{@version}",
         extras: ["README.md", LICENSE: [title: "License"]],
         source_url: @source_url
-      ]
+      ],
+      # `.dialyzer_ignore.exs` lists what dialyzer reports that is not a defect, each with the reason.
+      dialyzer: [ignore_warnings: ".dialyzer_ignore.exs"]
     ]
   end
+
+  def cli, do: [preferred_envs: [ci: :test]]
 
   def application do
     [
@@ -51,7 +55,12 @@ defmodule MishkaCmsAuthSlack.MixProject do
       mishka_dep(:mishka_gervaz, "~> 0.0.2"),
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false}
+      {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.18", only: [:dev, :test], runtime: false},
+      {:jump_credo_checks, "~> 0.7", only: [:dev, :test], runtime: false},
+      {:ex_slop, "~> 0.4", only: [:dev, :test], runtime: false},
+      {:ex_dna, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -70,7 +79,23 @@ defmodule MishkaCmsAuthSlack.MixProject do
   end
 
   # The provider is a module: its tests run without starting the CMS.
-  defp aliases, do: [test: ["test --no-start"]]
+  defp aliases do
+    [
+      test: ["test --no-start"],
+      # The two audits come first: after `compile`, `mix hex.audit` is not found.
+      ci: [
+        "hex.audit",
+        "deps.audit",
+        "compile --warnings-as-errors",
+        "format --check-formatted",
+        "credo --strict",
+        "sobelow --config",
+        "dialyzer",
+        "ex_dna --max-clones 0",
+        "test"
+      ]
+    ]
+  end
 
   defp package do
     [
