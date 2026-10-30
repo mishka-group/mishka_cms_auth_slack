@@ -5,7 +5,7 @@
 defmodule MishkaCmsAuthSlack.MixProject do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.0.2"
   @source_url "https://github.com/mishka-group/mishka_cms_auth_slack"
 
   def project do
@@ -50,7 +50,7 @@ defmodule MishkaCmsAuthSlack.MixProject do
 
   defp deps do
     [
-      mishka_dep(:mishka_cms_core, "~> 0.0.2"),
+      mishka_dep(:mishka_cms_core, "~> 0.0.3"),
       {:ash_authentication, "~> 5.0.0-rc.15"},
       mishka_dep(:mishka_gervaz, "~> 0.0.2"),
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
