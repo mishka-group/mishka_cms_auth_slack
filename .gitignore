@@ -22,3 +22,4 @@ mishka_cms_auth_slack-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
+.DS_Store
