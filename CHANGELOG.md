@@ -4,6 +4,7 @@
 - Every dependency is at its latest release, including mishka_installer 0.1.16, guarded_struct 0.1.6, ash 3.37.3, ash_authentication 5.0.0-rc.16 and localize 1.6.1
 - `mix hex.audit` and `mix deps.audit` report no security advisories or retired packages
 - Needs mishka_cms_core 0.0.5-alpha.13 (a page's event, info and state handlers keep their code signature with `CODE_SIGNING_KEY` set), mishka_gervaz 0.0.8 and guarded_struct 0.1.7. Every dependency is at its latest release, including ash 3.37.4 and spark 2.7.10
+- Dependencies are moved to ex_doc 0.40.5, hammer 7.6.0 and postgrex 0.23.0. assent 0.4.0 and color 1.0.0 stay behind, because ash_authentication pins assent to ~> 0.3.2 and image pins color to ~> 0.13
 
 # Changelog for MishkaCmsAuthSlack 0.0.2
 
