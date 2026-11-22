@@ -7,7 +7,7 @@ sets its own keys; no other setup is needed.
 
 ```elixir
 # mix.exs
-{:mishka_cms_auth_slack, "~> 0.0.2"}
+{:mishka_cms_auth_slack, "~> 0.0.3"}
 ```
 
 Run `mix deps.get` and restart. The package registers itself with Mishka CMS through
