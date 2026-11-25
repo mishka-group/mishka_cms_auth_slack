@@ -1,3 +1,8 @@
+# Changelog for MishkaCmsAuthSlack 0.0.4
+
+- Needs mishka_cms_core 0.0.7, which brings mishka_gervaz 0.0.13 and mishka_installer 0.1.18 (an extension archive is checked before it is unpacked)
+- Every dependency is at its latest release, including ash 3.38.1, ash_authentication 5.0.0-rc.18 and ash_authentication_phoenix 3.0.0-rc.12; assent 0.3.2 and bcrypt_elixir 3.3.2 stay behind because ash_authentication requires them
+
 # Changelog for MishkaCmsAuthSlack 0.0.3
 
 - Needs mishka_cms_core 0.0.5 and mishka_gervaz 0.0.4, where it needed 0.0.4 and 0.0.3. The Slack sign-in itself does not change
