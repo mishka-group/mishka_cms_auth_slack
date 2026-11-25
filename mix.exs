@@ -5,7 +5,7 @@
 defmodule MishkaCmsAuthSlack.MixProject do
   use Mix.Project
 
-  @version "0.0.3"
+  @version "0.0.4"
   @source_url "https://github.com/mishka-group/mishka_cms_auth_slack"
 
   def project do
